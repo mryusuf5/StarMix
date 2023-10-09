@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Playlists;
 use App\Models\Songs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -13,9 +14,13 @@ class SongsController extends Controller
      */
     public function index()
     {
+        $playlists = Playlists::where("user_id", Session::get("user")->id)->get();
         $songs = Songs::where("user_id", Session::get("user")->id)->get();
 
-        return view("welcome", compact("songs"));
+        return view("welcome", compact(
+            "songs",
+            "playlists"
+        ));
     }
 
     /**
@@ -42,11 +47,16 @@ class SongsController extends Controller
         }
 
         $songName = "song-" . time() . '.' . $request->file("song")->getClientOriginalExtension();
-        $imageName = "cover-" . time() . '.' . $request->file("image")->getClientOriginalExtension();
-        $request->file("song")->move("songs/", $songName);
-        $request->file("image")->move("img/songCovers/", $imageName);
+        $imageName = "";
 
-        $song = new Songs();
+        if($request->file("image"))
+        {
+            $imageName = "cover-" . time() . '.' . $request->file("image")->getClientOriginalExtension();
+            $request->file("image")->move("img/songCovers/", $imageName);
+        }
+
+        $request->file("song")->move("songs/", $songName);
+
         Songs::create([
             "artist" => $request->artist,
             "title" => $request->title,

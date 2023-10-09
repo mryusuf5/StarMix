@@ -12,7 +12,17 @@ data-image="{{strlen($image) != 0 ? asset("img/songCovers/" . $image) : asset("i
     <div class="d-flex align-items-center">
         <h3>{{$date ?? ""}}</h3>
     </div>
-    <div class="d-flex align-items-center">
-        <h3><i class="fa-solid fa-ellipsis-vertical"></i></h3>
+    @if($songId ?? "")
+    <div class="d-flex align-items-center dropdown">
+        <h3 data-bs-toggle="dropdown"><i class="fa-solid fa-ellipsis-vertical"></i></h3>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                   data-bs-target="#addSongToPlaylist-{{$songId ?? ""}}">
+                    Add song to a playlist
+                </a>
+            </li>
+        </ul>
     </div>
+    @endif
 </div>

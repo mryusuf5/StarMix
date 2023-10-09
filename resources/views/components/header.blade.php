@@ -13,6 +13,7 @@
     @yield("styles")
 </head>
 <body data-bs-theme="dark">
+
 <div class="container-fluid">
     <div class="row flex-nowrap">
         <div class="col-auto d-none d-lg-block col-xl-2 px-0 bg-dark" style="border-right: 1px solid #ffc107">
@@ -47,14 +48,26 @@
                         <span>
                             <i class="fa-solid fa-book"></i> Your library
                         </span>
-                        <span><i class="fa-solid fa-plus"></i></span>
+                        <span>
+                            <i class="fa-solid fa-plus cursor-pointer" data-bs-toggle="modal"
+                               data-bs-target="#addPlaylistModal"></i>
+                        </span>
                     </div>
                     <div class="w-100 border border-warning my-1"></div>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link text-white align-middle px-0">
-                            <i class="fa-solid fa-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
-                        </a>
-                    </li>
+                    @if($playlists ?? "")
+                        @foreach($playlists as $playlist)
+                            <li class="nav-item">
+                                <a href="{{route("playlists.show", $playlist)}}" class="nav-link text-white align-middle px-0">
+                                    <span class="ms-1 d-none d-sm-inline">{{$playlist->name}}</span>
+                                </a>
+                            </li>
+                        @endforeach
+                    @endif
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="#" class="nav-link text-white align-middle px-0">--}}
+{{--                            <i class="fa-solid fa-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                 </ul>
                 <hr>
                 <div class="dropdown pb-4">
