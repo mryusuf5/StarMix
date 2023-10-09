@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\PlaylistSongsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SongsController;
+use App\Http\Controllers\PlaylistsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +27,6 @@ Route::middleware("loggedIn")->group(function(){
     Route::get("/", [SongsController::class, "index"])->name("home");
 
     Route::resource("song", SongsController::class);
+    Route::resource("playlists", PlaylistsController::class);
+    Route::resource("playlistSongs", PlaylistSongsController::class);
 });
