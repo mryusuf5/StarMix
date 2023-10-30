@@ -32,4 +32,17 @@
 
     <x-player />
 @endcomponent
+
+@section("scripts")
+    <script>
+        const playlistLink = document.querySelector("#playlistLink");
+
+        playlistLink.addEventListener("click", () => {
+            navigator.clipboard.writeText(playlistLink.dataset.playlistLink);
+            alert("Link to playlist has been copied");
+        })
+    </script>
+@endsection
+
 <x-footer />
+
