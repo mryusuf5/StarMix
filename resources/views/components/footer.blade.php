@@ -4,5 +4,6 @@
 <script type="module" src="{{asset("js/musicplayer.js")}}"></script>
 <script src="{{asset("js/script.js")}}"></script>
 <x-toast></x-toast>
+@yield("scripts")
 </body>
 </html>

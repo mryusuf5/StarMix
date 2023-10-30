@@ -1,12 +1,6 @@
 const visualizerToggler = document.querySelector("#visualizerToggler");
 const visualizerContainer = document.querySelector("#visualizerContainer");
 const songsContainer = document.querySelector("#songsContainer");
-const playlistLink = document.querySelector("#playlistLink");
-
-playlistLink.addEventListener("click", () => {
-    navigator.clipboard.writeText(playlistLink.dataset.playlistLink);
-    alert("Link to playlist has been copied");
-})
 
 visualizerToggler.addEventListener("click", () => {
     if(visualizerContainer.classList.contains("d-none"))
